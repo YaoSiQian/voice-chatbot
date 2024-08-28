@@ -41,7 +41,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
     },
   ];
 
-  const [isBobSpeaking, setIsBobSpeaking] = useState(isChatbotSpeaking.current);
+  const [isQingSpeaking, setIsQingSpeaking] = useState(isChatbotSpeaking.current);
   const [isCalling, setIsCalling] = useState(isUserCalling.current);
   const { transcript, resetTranscript, listening } = useSpeechRecognition({
     commands,
@@ -50,7 +50,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
   const [userSpeechSynthesis, setUserSpeechSynthesis] = useState<SpeechSynthesis>();
   const [userLocalStorage, setUserLocalStorage] = useState<Storage>();
   const { selectedLanguage } = useLanguage();
-  const defaultIntroduction = t('bob.introduction');
+  const defaultIntroduction = t('qing.introduction');
   const defaultMessage = [
     {
       message: defaultIntroduction,
@@ -112,7 +112,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
 
   const handleChatbotSpeechStart = () => {
     isChatbotSpeaking.current = true;
-    setIsBobSpeaking(true);
+    setIsQingSpeaking(true);
     SpeechRecognition.stopListening();
   };
 
@@ -121,7 +121,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
       SpeechRecognition.startListening({ language: selectedLanguage });
     }
     isChatbotSpeaking.current = false;
-    setIsBobSpeaking(false);
+    setIsQingSpeaking(false);
   };
 
   const handleSend = async (message: string) => {
@@ -146,7 +146,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
     if (isChatbotSpeaking.current) {
       userSpeechSynthesis?.cancel();
       isChatbotSpeaking.current = false;
-      setIsBobSpeaking(false);
+      setIsQingSpeaking(false);
     }
     const chatGPTAnswer = await getChatGptAnswer(updatedMessages);
     setMessages([
@@ -178,7 +178,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
       setMessages([
         ...messages,
         {
-          message: t('bob.browserNotSupportSpeechRecognitionMessage'),
+          message: t('qing.browserNotSupportSpeechRecognitionMessage'),
           sender: 'ChatGPT',
         },
       ]);
@@ -187,7 +187,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
       return;
     }
 
-    const firstMessage = t('bob.firstMessage');
+    const firstMessage = t('qing.firstMessage');
     const formattedMessage = {
       message: firstMessage,
       sender: 'assistant',
@@ -221,7 +221,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
     if (isChatbotSpeaking.current) {
       userSpeechSynthesis?.cancel();
       isChatbotSpeaking.current = false;
-      setIsBobSpeaking(false);
+      setIsQingSpeaking(false);
     }
     SpeechRecognition.abortListening();
   };
@@ -242,7 +242,7 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
         endCall,
         handleSend,
         messages,
-        isChatbotSpeaking: isBobSpeaking,
+        isChatbotSpeaking: isQingSpeaking,
       }}
     >
       {children}

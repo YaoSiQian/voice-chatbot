@@ -1,7 +1,7 @@
-# 🤖 Call Bob
+# 🤖 Call Qing
 
 Inspired by [CallAnnie](https://callannie.ai/call),
-"Call Bob" is a React application that integrates with an OpenAI API and leverages the Web Speech API for voice recognition and speech synthesis.  
+"Call Qing" is a React application that integrates with an OpenAI API and leverages the Web Speech API for voice recognition and speech synthesis.  
 It provides an interactive and immersive calling conversational experience through voice.  
 Users can initiate a conversation, speak commands, or ask questions in multiple languages.
 
@@ -71,13 +71,13 @@ https://github.com/shihui-huang/react-voice-chatbot/assets/52117621/0abfbab5-143
 clone locally:
 
 ```
-$ git clone git@github.com:shihui-huang/call-bob.git
+$ git clone git@github.com:shihui-huang/call-Qing.git
 ```
 
 Then, run the development server:
 
 ```bash
-$ cd call-bob/
+$ cd call-Qing/
 $ npm install
 $ npm run dev
 ```

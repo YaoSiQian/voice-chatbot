@@ -36,7 +36,7 @@ class MockSpeechSynthesisUtterance {
   onend = mockHandleChatbotSpeechEnd;
 }
 
-describe('Call bob', () => {
+describe('Call qing', () => {
   let originalSpeechSynthesis;
   let originalSpeechSynthesisUtterance;
 
@@ -58,10 +58,10 @@ describe('Call bob', () => {
     window.SpeechSynthesisUtterance = originalSpeechSynthesisUtterance;
   });
 
-  it("should show bob's self introduction when rendering home page", () => {
+  it("should show qing's self introduction when rendering home page", () => {
     render(<Home />);
 
-    const introduction = screen.getByText('bob.introduction');
+    const introduction = screen.getByText('qing.introduction');
     expect(introduction).toBeInTheDocument();
   });
 
@@ -74,7 +74,7 @@ describe('Call bob', () => {
     await user.click(callButton);
 
     const browserNotSupportSpeechRecognitionMessage = await screen.findByText(
-      'bob.browserNotSupportSpeechRecognitionMessage'
+      'qing.browserNotSupportSpeechRecognitionMessage'
     );
     expect(browserNotSupportSpeechRecognitionMessage).toBeVisible();
   });
@@ -118,7 +118,7 @@ describe('Call bob', () => {
       // Check if chatbot speaks his first message
       expect(mockSpeak).toHaveBeenCalledTimes(1);
       const utteredMessage = mockSpeak.mock.calls[0][0].text;
-      expect(utteredMessage).toBe('bob.firstMessage');
+      expect(utteredMessage).toBe('qing.firstMessage');
     });
     mockSpeak.mockReset();
   });
@@ -255,7 +255,7 @@ describe('Call bob', () => {
     // should send right message to ChatGPT api
     expect(fetch).toHaveBeenCalledWith('/api/chat/message', {
       method: 'POST',
-      body: '[{"role":"system"},{"role":"assistant","content":"bob.introduction"},{"role":"user","content":"conversation.languagePractice.prompt"}]',
+      body: '[{"role":"system"},{"role":"assistant","content":"qing.introduction"},{"role":"user","content":"conversation.languagePractice.prompt"}]',
     });
 
     // should show chatbot's response
@@ -278,7 +278,7 @@ describe('Call bob', () => {
 
     const noHistoryMessage = await screen.findByText('callHistory.modal.noHistoryMessage');
     expect(screen.queryByText('2023-09-03T08:40:00.000Z')).not.toBeInTheDocument();
-    expect(screen.queryByText('bob.firstMessage')).not.toBeInTheDocument();
+    expect(screen.queryByText('qing.firstMessage')).not.toBeInTheDocument();
     expect(noHistoryMessage).toBeInTheDocument();
     const historyModalCloseButton = await screen.findByTestId('history-modal-close-button-true');
     user.click(historyModalCloseButton);
@@ -301,7 +301,7 @@ describe('Call bob', () => {
 
     await user.click(callHistoryButton);
     await waitFor(() => expect(screen.getByText('2023-09-03T08:40:00.000Z')).toBeInTheDocument());
-    await waitFor(() => expect(screen.getByText('bob.firstMessage')).toBeVisible());
+    await waitFor(() => expect(screen.getByText('qing.firstMessage')).toBeVisible());
     expect(noHistoryMessage).not.toBeInTheDocument();
   });
 });

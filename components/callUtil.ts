@@ -13,7 +13,7 @@ export async function getChatGptAnswer(messagesWithSender: { message: string; se
 
   const systemMessageToSetChatGptBehaviour = {
     role: 'system',
-    content: i18n?.t('bob.systemMessage'),
+    content: i18n?.t('qing.systemMessage'),
   };
 
   const chatGptApiMessages = [

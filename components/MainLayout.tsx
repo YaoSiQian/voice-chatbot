@@ -1,4 +1,4 @@
-import CallBob from './CallBob';
+import CallQing from './CallQing';
 import LanguageDropdown from './LanguageDropdown';
 import { Layout } from 'antd';
 import LanguageManager from './LanguageManager';
@@ -23,7 +23,7 @@ export default function MainLayout() {
               </div>
             </Header>
             <Content>
-              <CallBob />
+              <CallQing />
             </Content>
           </CallManager>
         </LanguageManager>
