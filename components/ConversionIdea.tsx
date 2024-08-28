@@ -38,7 +38,6 @@ export default function ConversionIdea({ onSelect }: ConversionIdeaProps) {
         <button
           className="bg-[#fdcfe1] border-2 border-[#e64683cf] mr-3 px-3 py-1 last:mr-0 text-black rounded"
           key={idea.key}
-          onClick={() => onSelect(idea.prompt)}
         >
           {idea.title}
         </button>

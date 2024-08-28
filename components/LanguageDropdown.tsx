@@ -21,22 +21,22 @@ interface languageOptionItem {
   key: string;
 }
 const languageOptions: MenuProps['items'] = [
-  {
-    label: 'English',
-    icon: '🇺🇸',
-    key: 'en-US',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    label: 'Français',
-    icon: '🇫🇷',
-    key: 'fr-FR',
-  },
-  {
-    type: 'divider',
-  },
+  // {
+  //   label: 'English',
+  //   icon: '🇺🇸',
+  //   key: 'en-US',
+  // },
+  // {
+  //   type: 'divider',
+  // },
+  // {
+  //   label: 'Français',
+  //   icon: '🇫🇷',
+  //   key: 'fr-FR',
+  // },
+  // {
+  //   type: 'divider',
+  // },
   {
     label: '中文',
     icon: '🇨🇳',

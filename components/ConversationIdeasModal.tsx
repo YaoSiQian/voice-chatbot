@@ -67,7 +67,7 @@ export default function ConversionIdeasModal() {
         ></FontAwesomeIcon>
       </Button>
 
-      <StyledDrawer
+      { /* <StyledDrawer
         title={<div className="text-white">{t('conversation.idea')}</div>}
         placement="bottom"
         height="50%"
@@ -91,7 +91,7 @@ export default function ConversionIdeasModal() {
             </List.Item>
           )}
         />
-      </StyledDrawer>
+      </StyledDrawer> */ }
     </div>
   );
 }
