@@ -69,23 +69,46 @@ const CallManager: React.FC<CallManagerProps> = ({ children }) => {
     endCall();
   }, [defaultIntroduction, selectedLanguage]);
 
-  const chatBotSpeak = (message: string) => {
+  const chatBotSpeak = async (text: string) => {
     if (isChatbotSpeaking.current || !userSpeechSynthesis || !isUserCalling.current) {
       return;
     }
 
-    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-      userSpeechSynthesis.speak(
-        new SpeechSynthesisUtterance(t('bob.browserNotSupportSpeechRecognitionMessage'))
-      );
-      return;
+    try {
+      SpeechRecognition.stopListening();
+      // 发送请求到 Next.js API 获取音频数据
+      const response = await fetch('/api/chat/audioApi', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch audio data from API');
+      }
+  
+      // 获取返回的 WAV 格式音频数据
+      const audioData = await response.arrayBuffer();
+  
+      // 将 ArrayBuffer 转换为音频文件并播放
+      const audioBlob = new Blob([audioData], { type: 'audio/wav' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.onplay = handleChatbotSpeechStart;
+      audio.play();
+  
+      // 监听音频结束事件
+      audio.onended = () => {
+        handleChatbotSpeechEnd();
+        URL.revokeObjectURL(audioUrl);  // 释放 URL 资源
+      };
+    } catch (error) {
+      console.error('Error in chatBotSpeak:', error);
     }
-    const utterance = new SpeechSynthesisUtterance(message);
-    utterance.lang = selectedLanguage;
-    utterance.onstart = handleChatbotSpeechStart;
-    utterance.onend = handleChatbotSpeechEnd;
-    userSpeechSynthesis.speak(utterance);
-  };
+  }
+  
 
   const handleChatbotSpeechStart = () => {
     isChatbotSpeaking.current = true;
