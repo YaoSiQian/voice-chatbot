@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('requestData:', requestData);
     try {
       // 使用 fetch 发送 POST 请求到本地服务器
-      const response = await fetch('http://192.168.1.160:23456/voice/gpt-sovits', {
+      const response = await fetch('https://vits.tl.yaosiqian.cn/voice/gpt-sovits', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
